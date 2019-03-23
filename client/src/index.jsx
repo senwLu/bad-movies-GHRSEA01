@@ -4,21 +4,31 @@ import $ from 'jquery';
 // import AnyComponent from './components/filename.jsx'
 import Search from './components/Search.jsx'
 import Movies from './components/Movies.jsx'
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
   	super(props)
   	this.state = {
-      movies: [{deway: "movies"}],
-      favorites: [{deway: "favorites"}],
+      movies: [],
+      favorites: [],
       showFaves: false,
     };
-    
+    this.getMovies = this.getMovies.bind(this);
     // you might have to do something important here!
   }
 
+  componentDidMount() {
+    this.getMovies();
+  }
+
   getMovies() {
-    // make an axios request to your server on the GET SEARCH endpoint
+    // make an axios request to your server on the GET SEARCH endpoint\
+    axios.get('/movies/search')
+    .then((result) => {
+      this.setState({movies: result.data.results})
+    })
+    .catch((err) => res.status(500).send(err))
   }
 
   saveMovie() {

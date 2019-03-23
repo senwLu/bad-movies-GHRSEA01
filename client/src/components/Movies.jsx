@@ -15,12 +15,34 @@ class Movies extends React.Component {
   render() {
     return (
       <ul className="movies">
+      
+      {this.props.movies.map((movie, i) => {
+        return (
+          <li className="movie_item" key={i}>
+            <img src={`http://image.tmdb.org/t/p/original/${movie.poster_path}`} />
+            <div className="movie_description">
+              <h2>{movie.original_title}</h2>
+              <section className="movie_details">
+                <div className="movie_year">
+                  <span className="title">Year</span>
+                  <span>{movie.release_date.split('-')[0]}</span>
+                </div>
+                <div className="movie_rating">
+                  <span className="title">Rating</span>
+                  <span>{movie.vote_average}</span>
+                </div>
+              </section>
+            </div>
+          </li>
+        )
+      })}
+
 
 
         {/* Make this list dynamic! */}
 
 
-        <li className="movie_item">
+        {/* <li className="movie_item">
           <img src="https://lh3.googleusercontent.com/97gnjRiv2zIRnDupzfxYFoI-6zlIK3jKgb6KOCDf_tjWkY9epbITdSFIbiKhuccOqQ=w300" />
           <div className="movie_description">
             <h2>De Wae</h2>
@@ -163,9 +185,10 @@ class Movies extends React.Component {
               </div>
             </section>
           </div>
-        </li>
+        </li> */}
 
       </ul>
+
     );
   }
 }
